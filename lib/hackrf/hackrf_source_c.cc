@@ -204,6 +204,9 @@ hackrf_source_c::hackrf_source_c (const std::string &args)
   }
 
 //  _thread = gr::thread::thread(_hackrf_wait, this);
+  bool hw_sync_enable = true;
+  ret = hackrf_set_hw_sync_mode(_dev, 1);
+  //HACKRF_THROW_ON_ERROR(ret, "Failed to set hw sync mode")
 
   ret = hackrf_start_rx( _dev, _hackrf_rx_callback, (void *)this );
   HACKRF_THROW_ON_ERROR(ret, "Failed to start RX streaming")
